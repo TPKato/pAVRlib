@@ -1,0 +1,11 @@
+* How to make
+
+  1. Edit =device.inc= (or =.asm= file to be made)
+  2. Edit =Makefile=
+  3. ~make TARGET=[~ /filename without suffix/ ~]~
+  4. ~make TARGET=[~ /filename without suffix/ ~] flash~
+
+For example, to make =usart-test=, do
+
+  1. ~make TARGET=usart-test~
+  2. ~make TARGET=usart-test flash~
