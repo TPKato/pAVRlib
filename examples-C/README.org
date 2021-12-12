@@ -1,0 +1,13 @@
+* How to make
+
+1. Edit ~*config.h~ (if exists)
+2. Edit ~Makefile~
+3. ~make TARGET=[~ /filename without suffix/ ~]~
+4. ~make TARGET=[~ /filename without suffix/ ~] flash~
+
+For example, to make ~wait-test~, do
+
+1. ~vi waitconfig.h~
+2. ~vi Makefile~
+3. ~make TARGET=wait-test~
+4. ~make TARGET=wait-test flash~

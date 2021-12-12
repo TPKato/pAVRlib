@@ -16,3 +16,9 @@
 .equ USART_PIN  = PINB
 .equ USART_RXD  = 3		; PB3 (Pin 2 of ATtiny25/45/85)
 .equ USART_TXD  = 4		; PB4 (Pin 3 of ATtiny25/45/85)
+
+;;; ------------------------------------------------------------
+;;; Parameters for wait-test
+.equ	WAIT_LEDPIN = 1
+.equ	WAIT_LEDPORT = PORTB
+.equ	WAIT_LEDDDR = DDRB
