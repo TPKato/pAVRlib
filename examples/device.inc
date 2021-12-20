@@ -9,6 +9,9 @@
 ;;; options for USART related programs
 .equ USART_BAUD	= 4800
 
+;;; for TWI
+.equ F_SCL	= 100000
+
 ;;; You need to define the following constants to make USART related
 ;;; programs, if you use AVRs which have no hardware USART (e.g. ATtiny25).
 .equ USART_DDR  = DDRB
@@ -22,3 +25,7 @@
 .equ	WAIT_LEDPIN = 1
 .equ	WAIT_LEDPORT = PORTB
 .equ	WAIT_LEDDDR = DDRB
+
+;;; ------------------------------------------------------------
+;;; for twi-controller-test
+#undef TWITEST_SHOW_NOTFOUND
