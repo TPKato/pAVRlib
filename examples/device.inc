@@ -22,9 +22,9 @@
 
 ;;; ------------------------------------------------------------
 ;;; Parameters for wait-test
-.equ	WAIT_LEDPIN = 1
-.equ	WAIT_LEDPORT = PORTB
-.equ	WAIT_LEDDDR = DDRB
+.equ WAIT_LEDPIN  = 1
+.equ WAIT_LEDPORT = PORTB
+.equ WAIT_LEDDDR  = DDRB
 
 ;;; ------------------------------------------------------------
 ;;; for twi-controller-test
