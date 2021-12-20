@@ -4,6 +4,9 @@
 ;;-
 ;;- In =examples/= you'll find a small test program.
 ;;-
+;;- The software UART is written based on
+;;- [[https://www.microchip.com/en-us/application-notes/an0952][Application Note AVR305]].
+;;-
 ;;- * Initialize
 ;;-
 ;;- Before you use this routines, you need define ~F_CPU~ (in Hz) and ~USART_BAUD~.
@@ -169,9 +172,7 @@ USART_RECEIVE:
 
 ;;; ------------------------------------------------------------
 ;;; for devices which have no hardware USART (e.g. ATtiny25)
-;;;
-;;; This routine is based on Software UART Application Note AVR305.
-;;; https://www.microchip.com/wwwAppNotes/AppNotes.aspx?appnote=en591261
+;;; (based on AVR Application Note AVR305)
 
 #ifndef USART_DELAY_VALUE
 ;; Note: "+3" is added for rounding (instead of rounding down)
