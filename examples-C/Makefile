@@ -56,6 +56,11 @@ clean:
 # ------------------------------------------------------------
 # dependencies
 # ------------------------------------------------------------
+# am2302-test
+am2302-test: am2302-test.o am2302.o wait.o
+am2302.o: $(PAVRLIBDIR)/devices/am2302.asm am2302config.h
+	$(CC) $(ASFLAGS) --include=$(basename $@)config.h -c $<
+
 # wait-test
 wait-test: wait-test.o wait.o
 wait-test.o: wait-test.c waitconfig.h

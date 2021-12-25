@@ -29,3 +29,10 @@
 ;;; ------------------------------------------------------------
 ;;; for twi-controller-test
 #undef TWITEST_SHOW_NOTFOUND
+
+;;; ------------------------------------------------------------
+;;; for am2303-test
+.equ AM_DDR	= DDRB
+.equ AM_PORT	= PORTB
+.equ AM_PIN	= PINB
+.equ AM_SDA	= 0
