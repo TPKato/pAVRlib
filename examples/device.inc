@@ -36,3 +36,11 @@
 .equ AM_PORT	= PORTB
 .equ AM_PIN	= PINB
 .equ AM_SDA	= 0
+
+;;; ------------------------------------------------------------
+;;; for ccs811-test
+.define CCS811TEST_USE_INTERRUPT_MODE
+.define CCS811_USE_RESET
+.equ	CCS811_RESET_DDR	= DDRB
+.equ	CCS811_RESET_PORT	= PORTB
+.equ	CCS811_RESET_PINNUM	= 6

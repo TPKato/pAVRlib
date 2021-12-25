@@ -61,9 +61,15 @@ am2302-test: am2302-test.o am2302.o wait.o
 am2302.o: $(PAVRLIBDIR)/devices/am2302.asm am2302config.h
 	$(CC) $(ASFLAGS) --include=$(basename $@)config.h -c $<
 
+# ccs811-test
+ccs811-test: ccs811-test.o ccs811.o wait.o twi-controller.o
+ccs811.o: $(PAVRLIBDIR)/devices/ccs811.asm $(PAVRLIBDIR)/devices/ccs811.h ccs811config.h
+	$(CC) $(ASFLAGS) --include=$(basename $@)config.h -c $<
+
 # wait-test
 wait-test: wait-test.o wait.o
 wait-test.o: wait-test.c waitconfig.h
 
 # common
 wait.o: $(PAVRLIBDIR)/wait.asm
+twi-controller.o: $(PAVRLIBDIR)/twi-controller.asm $(PAVRLIBDIR)/twi-controller.h

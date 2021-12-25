@@ -1,0 +1,10 @@
+#ifndef __CCS811CONFIG_H__
+#define __CCS811CONFIG_H__
+
+#define	CCS811_USE_RESET
+
+#define	CCS811_RESET_DDR	DDRC
+#define	CCS811_RESET_PORT	PORTC
+#define	CCS811_RESET_PINNUM	3
+
+#endif /* __CCS811CONFIG_H__ */
