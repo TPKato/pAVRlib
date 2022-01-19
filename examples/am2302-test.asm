@@ -1,6 +1,6 @@
 ;;; Test program of devices/am2302.asm
 ;;;
-;;- This program reads data from AM2302 and show the data via USART like this:
+;;- This program reads data from AM2302 and shows the data via USART like this:
 ;;-
 ;;- #+begin_src sh
 ;;- $ dterm /dev/ttyUSB0 4800
