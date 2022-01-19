@@ -56,21 +56,32 @@
 ;;- #+END_SRC
 ;;-
 
-.ifndef	F_CPU
-.error "Specify a frequency of the system clock (F_CPU)."
-.endif
+#ifndef	F_CPU
+#error "Specify a frequency of the system clock (F_CPU)."
+#endif
 
-.ifndef USART_BAUD
-.equ USART_BAUD	= 4800
-.message "INFO: USART_BAUD is not defined. The default value (4800) will be used."
-.endif
+#ifndef USART_BAUD
+#define USART_BAUD 4800
+#warning "INFO: USART_BAUD is not defined. The default value (4800) will be used."
+#endif
+
+#ifdef __GNUC__
+#include <avr/io.h>
+
+#define high(x)	hi8(x)
+#define low(x)	lo8(x)
+
+.global USART_INITIALIZE
+.global USART_RECEIVE
+.global USART_TRANSMIT
+#endif
 
 #ifdef UBRR0H
 
 ;;; ------------------------------------------------------------
 ;;; for devices which have UBRR0H (e.g. ATmega48)
 
-.equ UBRRVAL= (F_CPU + 4 * USART_BAUD) / (8 * USART_BAUD) - 1
+#define UBRRVAL ((F_CPU + 4 * USART_BAUD) / (8 * USART_BAUD) - 1)
 
 USART_INITIALIZE:
 	push	r16
@@ -127,7 +138,7 @@ _USART_RECEIVE_wait:
 ;;; ------------------------------------------------------------
 ;;; for devices which have UBRRH (e.g. ATmega8)
 
-.equ UBRRVAL= (F_CPU + 4 * USART_BAUD) / (8 * USART_BAUD) - 1
+#define UBRRVAL= (F_CPU + 4 * USART_BAUD) / (8 * USART_BAUD) - 1
 
 USART_INITIALIZE:
 	push	r16

@@ -2,16 +2,20 @@
 ;;;
 ;;- a small subroutine to print a hexadecimal value via USART.
 ;;- This code is a part of [[../][pAVRlib]].
-;;- 
+;;-
 ;;- * Requirement
 ;;-   - [[../usart][usart.asm]]
 ;;-   - [[../bin2ascii][bin2ascii.asm]]
 ;;-
 ;;- * Subroutine
-;;- 
+;;-
 ;;- ** ~void USART_HEX(char)~ (in: r24, out: (none))
 ;;-    send the value of r24 as a hexadecimal value (two ASCII characters) via USART.
-;;- 
+;;-
+
+#ifdef __GNUC__
+.global USART_PUTHEX
+#endif
 
 USART_PUTHEX:
 	push	r24

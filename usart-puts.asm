@@ -29,6 +29,10 @@
 ;;- #+END_SRC
 ;;-
 
+#ifdef __GNUC__
+.global USART_PUTS
+#endif
+
 USART_PUTS:
 	push	r24
 	push	r31
@@ -36,8 +40,10 @@ USART_PUTS:
 
 	mov	r31, r25
 	mov	r30, r24
+#ifndef __GNUC__
 	lsl	r30
 	rol	r31
+#endif
 
 _put_string_loop:
 	lpm	r24, Z+

@@ -23,18 +23,37 @@
 ;;- (0x7fff = 32767_{10}).
 ;;-
 
-.equ	AtBCD0	= 21		; address of tBCD0
-.equ	AtBCD2	= 23		; address of tBCD2
+#ifdef __GNUC__
+#include <avr/io.h>
 
-.def	tBCD0	= r21		; BCD value digits 1 and 0
-.def	tBCD1	= r22		; BCD value digits 3 and 2
-.def	tBCD2	= r23		; BCD value digit 4
+AtBCD0	= 21		; address of tBCD0
+AtBCD2	= 23		; address of tBCD2
 
-.def	fbinL	= r24		; binary value low byte
-.def	fbinH	= r25		; binary value high byte
+tBCD0	= 21		; BCD value digits 1 and 0
+tBCD1	= 22		; BCD value digits 3 and 2
+tBCD2	= 23		; BCD value digit 4
 
-.def	cnt16a	= r18		; loop counter
-.def	tmp16a	= r19		; temporary value
+fbinL	= 24		; binary value low byte
+fbinH	= 25		; binary value high byte
+
+cnt16a	= 18		; loop counter
+tmp16a	= 19		; temporary value
+
+.global BIN2BCD16
+#else
+.equ	AtBCD0	= 21	; address of tBCD0
+.equ	AtBCD2	= 23	; address of tBCD2
+
+.def	tBCD0	= r21	; BCD value digits 1 and 0
+.def	tBCD1	= r22	; BCD value digits 3 and 2
+.def	tBCD2	= r23	; BCD value digit 4
+
+.def	fbinL	= r24	; binary value low byte
+.def	fbinH	= r25	; binary value high byte
+
+.def	cnt16a	= r18	; loop counter
+.def	tmp16a	= r19	; temporary value
+#endif
 
 BIN2BCD16:
 	;; Note: These 6 registers are not needed to be restored (according to the avr-gcc ABI).
