@@ -138,7 +138,7 @@ _USART_RECEIVE_wait:
 ;;; ------------------------------------------------------------
 ;;; for devices which have UBRRH (e.g. ATmega8)
 
-#define UBRRVAL= (F_CPU + 4 * USART_BAUD) / (8 * USART_BAUD) - 1
+#define UBRRVAL ((F_CPU + 4 * USART_BAUD) / (8 * USART_BAUD) - 1)
 
 USART_INITIALIZE:
 	push	r16
