@@ -44,3 +44,20 @@
 .equ	CCS811_RESET_DDR	= DDRB
 .equ	CCS811_RESET_PORT	= PORTB
 .equ	CCS811_RESET_PINNUM	= 6
+
+;;; ------------------------------------------------------------
+;;; for max31855-test
+.equ	MAX_CK_DDR	= DDRD
+.equ	MAX_CK_PORT	= PORTD
+.equ	MAX_CK_PIN	= PIND
+.equ	MAX_CK		= 7
+
+.equ	MAX_CS_DDR	= DDRD
+.equ	MAX_CS_PORT	= PORTD
+.equ	MAX_CS_PIN	= PIND
+.equ	MAX_CS		= 6
+
+.equ	MAX_DO_DDR	= DDRD
+.equ	MAX_DO_PORT	= PORTD
+.equ	MAX_DO_PIN	= PIND
+.equ	MAX_DO		= 5
