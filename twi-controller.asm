@@ -7,6 +7,26 @@
 ;;- This program works only on AVRs which have a TWI module.
 ;;-
 
+;;; From:
+;;;   Atmel Corporation, AVR001: Conditional Assembly and portability macros, 2008.
+;;;   https://www.microchip.com/en-us/application-notes/an2550
+.MACRO OUTSTS
+	.if @0>0x3F
+		sts @0, @1
+	.else
+		out @0, @1
+	.endif
+.ENDMACRO
+
+.MACRO INLDS
+	.if @1>0x3F
+		lds @0, @1
+	.else
+		in @0, @1
+	.endif
+.ENDMACRO
+
+
 #ifdef __GNUC__
 #define __SFR_OFFSET 0
 
@@ -58,7 +78,7 @@
 TWI_INITIALIZE:
 	push	r16
 	ldi	r16, (F_CPU/(2*F_SCL)-8)
-	out	TWBR, r16
+	OUTSTS	TWBR, r16
 	pop	r16
 	ret
 
@@ -73,16 +93,16 @@ TWI_INITIALIZE:
 TWI_SEND_S:
 	; send start bit
 	ldi	TWISTAT, (1<<TWINT)|(1<<TWSTA)|(1<<TWEN)
-	out	TWCR, TWISTAT
+	OUTSTS	TWCR, TWISTAT
 
 	; wait ack
 _TWI_SEND_S_WAIT:
-	in	TWISTAT, TWCR
+	INLDS	TWISTAT, TWCR
 	sbrs	TWISTAT, TWINT
 	rjmp	_TWI_SEND_S_WAIT
 
 	; store status
-	in	TWISTAT, TWSR
+	INLDS	TWISTAT, TWSR
 	andi	TWISTAT, 0xf8
 	ret
 
@@ -95,7 +115,7 @@ TWI_SEND_P:
 	push	r16
 	; send stop bit
 	ldi	r16, (1<<TWINT)|(1<<TWSTO)|(1<<TWEN)
-	out	TWCR, r16
+	OUTSTS	TWCR, r16
 	pop	r16
 	ret
 
@@ -131,18 +151,18 @@ TWI_SEND:
 	push	TWIDATA
 
 _TWI_SEND_MAIN:
-	out	TWDR, TWIDATA
+	OUTSTS	TWDR, TWIDATA
 	ldi	TWIDATA, (1<<TWINT)|(1<<TWEN)
-	out	TWCR, TWIDATA
+	OUTSTS	TWCR, TWIDATA
 
 	; wait ack
 _TWI_SEND_WAIT:
-	in	TWIDATA, TWCR
+	INLDS	TWIDATA, TWCR
 	sbrs	TWIDATA, TWINT
 	rjmp	_TWI_SEND_WAIT
 
 	; store status
-	in	TWISTAT, TWSR
+	INLDS	TWISTAT, TWSR
 	andi	TWISTAT, 0xf8
 
 	pop	TWIDATA
@@ -165,19 +185,19 @@ TWI_RECV_NACK:
 	ldi	TWISTAT, (1<<TWINT)|(1<<TWEN)
 
 _TWI_RECV_MAIN:
-	out	TWCR, TWISTAT
+	OUTSTS	TWCR, TWISTAT
 
 	; wait ack
 _TWI_RECV_WAIT:
-	in	TWISTAT, TWCR
+	INLDS	TWISTAT, TWCR
 	sbrs	TWISTAT, TWINT
 	rjmp	_TWI_RECV_WAIT
 
 	; store data
-	in	TWIDATA, TWDR
+	INLDS	TWIDATA, TWDR
 
 	; store status
-	in	TWISTAT, TWSR
+	INLDS	TWISTAT, TWSR
 	andi	TWISTAT, 0xf8
 	ret
 
